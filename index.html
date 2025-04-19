@@ -11,49 +11,71 @@
       margin: 0;
       padding: 0;
       font-family: 'Press Start 2P', cursive;
-      background-color: #000000;
-      background-image: url('https://imageio.forbes.com/specials-images/dam/imageserve/1144033083/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds'); /* high-res pixel style */
+      background-color: #000;
+      background-image: url('https://imageio.forbes.com/specials-images/dam/imageserve/1144033083/0x0.jpg?format=jpg&width=1920&height=1080&fit=bounds');
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: center;
+      background-repeat: no-repeat;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      color: #39ff14;
       text-align: center;
+      color: #39ff14;
     }
 
     h1 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
       background: rgba(0, 0, 0, 0.75);
       padding: 1rem;
-      border: 3px solid #39ff14;
-      border-radius: 12px;
-      text-shadow: 2px 2px 0 #000;
+      margin-bottom: 1rem;
+      border: 2px solid #39ff14;
+      border-radius: 10px;
+      text-shadow: 1px 1px 0 #000;
     }
 
     #countdown {
       display: flex;
-      gap: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 2rem;
-      border: 3px dotted #39ff14;
-      border-radius: 15px;
-      box-shadow: 0 0 12px #39ff14;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 1rem;
+      border: 2px dashed #39ff14;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #39ff14;
     }
 
     .time {
-      font-size: 1.2rem;
+      font-size: 1rem;
+      margin: 0.5rem;
     }
 
     .label {
       display: block;
       font-size: 0.6rem;
       color: #caffc3;
-      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+
+      .time {
+        font-size: 0.9rem;
+      }
+
+      .label {
+        font-size: 0.5rem;
+      }
+
+      #countdown {
+        padding: 0.5rem;
+        gap: 5px;
+      }
     }
   </style>
 </head>
@@ -71,7 +93,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        document.getElementById('countdown').textContent = "You're in Richmond!";
+        document.getElementById('countdown').textContent = "Maggie & Payton are in Richmond!";
         clearInterval(timer);
         return;
       }
