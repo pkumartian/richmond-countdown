@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Richmond</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #000000;
+      background-image: url('https://imageio.forbes.com/specials-images/dam/imageserve/1144033083/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds'); /* high-res pixel style */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #39ff14;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 1rem;
+      border: 3px solid #39ff14;
+      border-radius: 12px;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    #countdown {
+      display: flex;
+      gap: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 2rem;
+      border: 3px dotted #39ff14;
+      border-radius: 15px;
+      box-shadow: 0 0 12px #39ff14;
+    }
+
+    .time {
+      font-size: 1.2rem;
+    }
+
+    .label {
+      display: block;
+      font-size: 0.6rem;
+      color: #caffc3;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown to Richmond, VA</h1>
+  <div id="countdown"></div>
+
+  <script>
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 28);
+    targetDate.setHours(0, 0, 0, 0);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').textContent = "You're in Richmond!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('countdown').innerHTML = `
+        <div class="time">${days}<span class="label">DAYS</span></div>
+        <div class="time">${hours}<span class="label">HRS</span></div>
+        <div class="time">${minutes}<span class="label">MIN</span></div>
+        <div class="time">${seconds}<span class="label">SEC</span></div>
+      `;
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
