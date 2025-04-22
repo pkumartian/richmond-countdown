@@ -63,15 +63,12 @@
         font-size: 1rem;
         padding: 0.5rem;
       }
-
       .time {
         font-size: 0.9rem;
       }
-
       .label {
         font-size: 0.5rem;
       }
-
       #countdown {
         padding: 0.5rem;
         gap: 5px;
@@ -84,25 +81,32 @@
   <div id="countdown"></div>
 
   <script>
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 28);
-    targetDate.setHours(0, 0, 0, 0);
+    // 1. Set a fixed target date: May 17, 2025 at 00:00 local time
+    const targetDate = new Date("2025-05-17T00:00:00").getTime();
 
     function updateCountdown() {
-      const now = new Date();
+      const now = Date.now();
       const diff = targetDate - now;
 
+      // 2. If we've reached (or passed) the target, stop and show your message
       if (diff <= 0) {
-        document.getElementById('countdown').textContent = "Maggie & Payton are in Richmond!";
+        document.getElementById('countdown').innerHTML = `
+          <div class="time">0<span class="label">DAYS</span></div>
+          <div class="time">0<span class="label">HRS</span></div>
+          <div class="time">0<span class="label">MIN</span></div>
+          <div class="time">0<span class="label">SEC</span></div>
+        `;
         clearInterval(timer);
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      // 3. Calculate remaining time components
+      const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours   = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
+      // 4. Render the countdown
       document.getElementById('countdown').innerHTML = `
         <div class="time">${days}<span class="label">DAYS</span></div>
         <div class="time">${hours}<span class="label">HRS</span></div>
@@ -111,8 +115,9 @@
       `;
     }
 
+    // 5. Kick off the timer
     const timer = setInterval(updateCountdown, 1000);
-    updateCountdown();
+    updateCountdown(); // initial call so there’s no 1s delay
   </script>
 </body>
 </html>
